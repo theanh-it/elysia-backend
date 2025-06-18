@@ -10,12 +10,12 @@ export default async (context: Context) => {
     const token = getToken(context);
 
     if (!token) {
-      const errorMessage = createErrorMessage(
-        {
+      const errorMessage = createErrorMessage({
+        message: "Required token",
+        result: {
           token: "Required token",
         },
-        "Unauthorized"
-      );
+      });
 
       return context.status(401, errorMessage);
     }
@@ -25,12 +25,12 @@ export default async (context: Context) => {
 
     Object.assign(context, { user });
   } catch (error) {
-    const errorMessage = createErrorMessage(
-      {
+    const errorMessage = createErrorMessage({
+      message: "Invalid token",
+      result: {
         token: "Invalid token",
       },
-      "Unauthorized"
-    );
+    });
 
     return context.status(401, errorMessage);
   }
