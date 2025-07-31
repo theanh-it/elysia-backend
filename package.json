@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "bun run dist/app.js",
-    "dev": "bun run --watch app.ts",
+    "dev": "bunx nodemon --exec \"bun run\" app.ts",
     "build": "bun build app.ts --outdir dist --target node",
     "prisma:reset": "bunx prisma migrate reset",
     "prisma:migrate": "bunx prisma migrate dev",
