@@ -4,7 +4,7 @@ import os from "os";
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
-import { nnnRouterPlugin } from "elysia-nnn-router";
+import { nnnRouterPlugin } from "./index";
 
 const app = new Elysia();
 const port = process.env.PORT || 3000;
@@ -15,7 +15,12 @@ const configStatic = {
 
 app.use(cors());
 app.use(staticPlugin(configStatic));
-app.use(nnnRouterPlugin());
+app.use(
+  nnnRouterPlugin({
+    dir: "routes",
+    prefix: "api",
+  })
+);
 app.get("/", () => ({
   status: "success",
   message: "Welcome to the elysia api",
